@@ -28,7 +28,7 @@ public class ReviewReport {
    *                       if fewer than two price records exist
    * @param biggestLossDay the trading day with the largest single-day loss; may be null
    *                       if fewer than two price records exist
-   * @param dailyReviews   per-day analysis objects; a defensive copy is made
+   * @param dailyReviews   per-day analysis objects
    * @param summary        the textual summary of the review period, must not be null
    * @throws IllegalArgumentException if required fields are null or dates are invalid
    */
