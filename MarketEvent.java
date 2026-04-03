@@ -1,5 +1,3 @@
-package stockreview.model;
-
 import java.time.LocalDate;
 
 /**
