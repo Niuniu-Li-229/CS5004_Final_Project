@@ -1,5 +1,3 @@
-package stockreview.model;
-
 /**
  * Represents the category of a market event or news article.
  *
