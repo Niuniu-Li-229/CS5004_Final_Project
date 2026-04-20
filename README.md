@@ -348,6 +348,7 @@ curl -Lo lib/junit-platform-console-standalone.jar \
 - Bloch, J. (2018). *Effective Java* (3rd ed.). Addison-Wesley. — defensive copies, item design
 - Gamma, E., Helm, R., Johnson, R., & Vlissides, J. (1994). *Design Patterns*. Addison-Wesley. — MVC, Strategy pattern
 - Yahoo Finance. (n.d.). Tesla, Inc. (TSLA) stock price, news, quote & history. Yahoo Finance. Retrieved April 20, 2026, from https://finance.yahoo.com/quote/TSLA/
+- Finnhub. (n.d.). Company news: TSLA. Finnhub. Retrieved April 20, 2026, from https://finnhub.io/docs/api/company-news
 
 ---
 
