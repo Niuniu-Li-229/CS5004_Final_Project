@@ -48,8 +48,6 @@ and real-world data processing — all core themes of CS 5004.
 On launch, the app auto-loads `data/TSLA_price.csv` and `data/TSLA_news.csv` and runs an
 initial analysis automatically.
 
-![Application screenshot placeholder — replace with actual screenshot]
-
 | Panel | Purpose |
 |---|---|
 | **Price Chart** | Candlestick-style chart with anomaly days highlighted |
@@ -326,7 +324,7 @@ curl -Lo lib/junit-platform-console-standalone.jar \
 
 ### Current Limitations
 
-- Data is limited to TSLA; the CSV format is specific to Finnhub export structure
+- Data is limited to TSLA
 - Event classification uses simple keyword matching and may misclassify ambiguous headlines
 - The anomaly detector compares consecutive CSV rows, so gaps (weekends, holidays already
   removed) do not affect accuracy, but missing rows in custom CSVs could produce incorrect
@@ -345,7 +343,6 @@ curl -Lo lib/junit-platform-console-standalone.jar \
 
 ## Citations and Resources
 
-- Finnhub Stock API — historical price and news data source: https://finnhub.io/docs/api
 - Oracle Java SE Documentation — Swing and core Java APIs: https://docs.oracle.com/en/java/javase/
 - JUnit 5 User Guide: https://junit.org/junit5/docs/current/user-guide/
 - Bloch, J. (2018). *Effective Java* (3rd ed.). Addison-Wesley. — defensive copies, item design
