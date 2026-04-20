@@ -17,7 +17,7 @@ class AnalysisResultTest {
 
   @BeforeEach
   void setUp() {
-    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 5), 168.0, 169.0, 164.0, 167.0, 50_000L);
+    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 5), 168.0, 169.0, 164.0, 167.0, 171.66, 50_000L);
     MarketEvent e = new MarketEvent(LocalDate.of(2025, 9, 5), "Sell-off", "Macro", "WSJ", EventType.MACRO);
     anomaly = new AnalysisResult.AnomalyPoint(p, -2.70, List.of(e), "Macro-driven drop");
   }
@@ -118,7 +118,7 @@ class AnalysisResultTest {
 
   @Test
   void anomalyPoint_positiveChange_isGainReturnsTrue() {
-    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 171.0, 172.0, 168.0, 170.0, 1000L);
+    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 171.0, 172.0, 168.0, 170.0, 169.0, 1000L);
     AnalysisResult.AnomalyPoint gain =
         new AnalysisResult.AnomalyPoint(p, 5.5, new ArrayList<>(), "Earnings beat");
     assertTrue(gain.isGain());
@@ -126,7 +126,7 @@ class AnalysisResultTest {
 
   @Test
   void anomalyPoint_zeroChange_isGainReturnsFalse() {
-    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 100.0, 100.0, 100.0, 0L);
+    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 100.0, 100.0, 100.0, 100.0, 0L);
     AnalysisResult.AnomalyPoint flat =
         new AnalysisResult.AnomalyPoint(p, 0.0, new ArrayList<>(), "Flat day");
     assertFalse(flat.isGain()); // 0 is not > 0
@@ -142,14 +142,14 @@ class AnalysisResultTest {
 
   @Test
   void anomalyPoint_nullRelatedEvents_throwsIllegalArgument() {
-    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 110.0, 90.0, 105.0, 1000L);
+    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 110.0, 90.0, 105.0, 99.0, 1000L);
     assertThrows(IllegalArgumentException.class, () ->
         new AnalysisResult.AnomalyPoint(p, 1.0, null, "comment"));
   }
 
   @Test
   void anomalyPoint_nullComment_throwsIllegalArgument() {
-    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 110.0, 90.0, 105.0, 1000L);
+    PricePoint p = new PricePoint(LocalDate.of(2025, 9, 3), 100.0, 110.0, 90.0, 105.0, 99.0, 1000L);
     assertThrows(IllegalArgumentException.class, () ->
         new AnalysisResult.AnomalyPoint(p, 1.0, new ArrayList<>(), null));
   }

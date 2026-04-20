@@ -83,4 +83,13 @@ class MarketEventTest {
     assertTrue(s.contains("Big news"));
     assertTrue(s.contains("Reuters"));
   }
+
+  @Test
+  void toString_containsDateTypeAndTitle() {
+    MarketEvent e = new MarketEvent(DATE, "Big news", "Desc", "Reuters", EventType.MACRO);
+    String s = e.toString();
+    assertTrue(s.contains("2025-09-02"));
+    assertTrue(s.contains("MACRO"));
+    assertTrue(s.contains("Big news"));
+  }
 }
