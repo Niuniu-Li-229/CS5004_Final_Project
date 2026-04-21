@@ -157,25 +157,29 @@ CS5004_Final_Project/
 
 ## Architecture
 
+This project follows the **Model-View-Controller (MVC)** pattern, keeping data, logic, and
+presentation in strictly separate layers.
+
 ```
-┌─────────────────────────────────────────┐
-│               View (Swing)              │
-│  MainFrame · PriceChartPanel            │
-│  EventTablePanel · AnalysisPanel        │
-└──────────────────┬──────────────────────┘
-                   │ calls
-┌──────────────────▼──────────────────────┐
-│             Controller                  │
-│  StockController · CsvLoader            │
-└──────────────────┬──────────────────────┘
-                   │ reads / builds
-┌──────────────────▼──────────────────────┐
-│               Model                     │
-│  StockDataModel · PricePoint            │
-│  MarketEvent · EarningsEvent            │
-│  AnalysisResult · EventType             │
-└─────────────────────────────────────────┘
+  ┌─────────────────────┐     queries / builds      ┌──────────────────────┐    pushes result     ┌─────────────────────┐
+  │        MODEL        │ ◄────────────────────────► │     CONTROLLER       │ ──────────────────► │        VIEW         │
+  │                     │                            │                      │ ◄─────────────────── │                     │
+  │  StockData          │                            │  CsvLoader           │   user actions       │  MainFrame          │
+  │  ├─ PricePoint      │                            │  StockController     │   (date, threshold)  │  PriceChartPanel    │
+  │  └─ MarketEvent     │                            │                      │                      │  EventTablePanel    │
+  │     └─ EarningsEvent│                            │                      │                      │  AnalysisPanel      │
+  │  StockDataModel     │                            │                      │                      │                     │
+  │  AnalysisResult     │                            │                      │                      │          ▲          │
+  │  EventType          │                            │                      │                      │          │          │
+  └─────────────────────┘                            └──────────────────────┘                      │        User         │
+                                                                                                   └─────────────────────┘
 ```
+
+| MVC Role | Responsibility |
+|---|---|
+| **Model** | Holds all data and business rules; never imports Swing; fully unit-tested |
+| **Controller** | Loads CSV data, runs anomaly detection, builds `AnalysisResult`; the only layer that touches both Model and View |
+| **View** | Renders results and captures user input; contains no business logic |
 
 `StockController.analyze()` scans the loaded price data, computes per-day percent change using
 the previous row's close, and flags any day whose absolute move meets the threshold. It then
@@ -290,7 +294,7 @@ The ticker symbol is derived from the price filename prefix before the first und
 
 ## Running the Tests
 
-**81 tests across 6 test classes — all passing.**
+**76 tests across 6 test classes — all passing.**
 
 ### Setup (one time)
 
@@ -310,13 +314,13 @@ curl -Lo lib/junit-platform-console-standalone.jar \
 
 | Test Class | Tests | What is covered |
 |---|---|---|
-| `PricePointTest` | 17 | Constructor validation, derived calculations, `getPercentChange`, `getSummary`, `toString` |
+| `PricePointTest` | 12 | Constructor validation, `getPreviousClose`, derived calculations, `getSummary`, `toString` |
 | `MarketEventTest` | 11 | Constructor validation, `isType`, `getSummary`, `toString` |
 | `EarningsEventTest` | 5 | Constructor, polymorphic `getSummary` override |
 | `StockDataModelTest` | 17 | Constructor, defensive copy, `getPricesInRange`, `getEventsByType` |
 | `AnalysisResultTest` | 21 | Constructor, `AnomalyPoint` inner class, unmodifiable lists |
 | `StockControllerTest` | 10 | Pre-load state, guard clauses, empty-range analysis |
-| **Total** | **81** | |
+| **Total** | **76** | |
 
 ---
 
