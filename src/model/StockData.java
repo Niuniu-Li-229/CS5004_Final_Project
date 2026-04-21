@@ -5,7 +5,7 @@ import java.time.LocalDate;
 /**
  * Represents Abstract base class for all time-stamped stock data objects.
  */
-public abstract class StockData {
+public abstract class StockData implements Summarizable {
 
   private final LocalDate date;
 
