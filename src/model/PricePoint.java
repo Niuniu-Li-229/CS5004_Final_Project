@@ -60,6 +60,10 @@ public class PricePoint extends StockData {
   /** @return the closing price */
   public double getClose() { return close; }
 
+  /** @return the closing price of the previous trading day */
+  public double getPreviousClose() { return previousClose; }
+
+
   /** @return the trading volume */
   public long getVolume()  { return volume; }
 
