@@ -17,10 +17,9 @@ class StockDataModelTest {
 
   @BeforeEach
   void setUp() {
-    // previousClose values reflect the prior day's close for each entry
-    p1 = new PricePoint(LocalDate.of(2025, 9, 2), 170.00, 172.38, 167.22, 170.78, 169.50, 100_000L);
-    p2 = new PricePoint(LocalDate.of(2025, 9, 3), 171.06, 172.41, 168.88, 170.62, 170.78, 200_000L);
-    p3 = new PricePoint(LocalDate.of(2025, 9, 4), 170.57, 171.84, 169.41, 171.66, 170.62, 150_000L);
+    p1 = new PricePoint(LocalDate.of(2025, 9, 2),  170.00, 172.38, 167.22, 170.78, 169.50, 100_000L);
+    p2 = new PricePoint(LocalDate.of(2025, 9, 3),  171.06, 172.41, 168.88, 170.62, 170.78,200_000L);
+    p3 = new PricePoint(LocalDate.of(2025, 9, 4),  170.57, 171.84, 169.41, 171.66, 170.62,150_000L);
 
     analyst = new MarketEvent(LocalDate.of(2025, 9, 2), "Analyst Upgrade", "Strong buy", "Bloomberg", EventType.ANALYST);
     macro   = new MarketEvent(LocalDate.of(2025, 9, 4), "Macro Sell-off",  "Fed fears",  "WSJ",       EventType.MACRO);
@@ -83,7 +82,7 @@ class StockDataModelTest {
   @Test
   void constructor_mutatingOriginalList_doesNotAffectModel() {
     StockDataModel m = new StockDataModel("NVDA", prices, events);
-    prices.add(new PricePoint(LocalDate.of(2025, 9, 5), 168.0, 169.0, 164.0, 167.0, 171.66, 50_000L));
+    prices.add(new PricePoint(LocalDate.of(2025, 9, 5), 168.0, 169.0, 164.0, 167.0, 171.66,50_000L));
     assertEquals(3, m.getPriceCount()); // model still has original 3
   }
 
